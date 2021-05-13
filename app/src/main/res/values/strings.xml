@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">CovSewa</string>
+
+    <string name="Privacy_Policy">By signing in you agree to our <u>Privacy Policy and Terms.</u>.</string>
+    <string name="Sign_in">Already have an account.   <u>Sign In.</u>.</string>
+    <string name="Register">Don\'t have an account.   <u>Register.</u>.</string>
+    <string name="forgot_you_password">Forgot you password?</string>
+    <string name="create_a_strong_password">Create a Strong Password</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+</resources>
