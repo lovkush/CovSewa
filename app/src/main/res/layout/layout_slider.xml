@@ -18,7 +18,6 @@
     <ImageView
         android:layout_width="350dp"
         android:layout_height="350dp"
-        android:src="@drawable/account"
         android:id="@+id/imgPager"
         android:layout_gravity="center"/>
 

@@ -13,4 +13,6 @@
     <color name="primaryDarkColor">#000051</color>
     <color name="primaryTextColor">#ffffff</color>
     <color name="backgroundColorBlue">#ffe7f0ff</color>
+    <color name="Pink">#f9c4FD</color>
+    <color name="lightPink">#F6DFF8</color>
 </resources>
