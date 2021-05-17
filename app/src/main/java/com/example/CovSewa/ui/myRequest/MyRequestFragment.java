@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,6 +17,7 @@ import com.example.CovSewa.ui.AboutUs.MyRequestViewModel;
 
 public class MyRequestFragment extends Fragment {
     private MyRequestViewModel myRequestViewModel;
+    private TextView requestList, requestReview;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -28,6 +30,19 @@ public class MyRequestFragment extends Fragment {
 
             }
         });
+
+        requestList = root.findViewById(R.id.requestList);
+        requestReview= root.findViewById(R.id.requestReview);
+
+        requestList.setOnClickListener(v->{
+
+        });
+
         return root;
     }
+
+    private void changeView(TextView textView){
+        textView.setTextColor(getResources().getColor(R.color.primaryDarkColor));
+    }
+
 }

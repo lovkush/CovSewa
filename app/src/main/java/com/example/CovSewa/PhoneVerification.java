@@ -66,6 +66,9 @@ public class PhoneVerification extends AppCompatActivity {
 //        edtOTP = findViewById(R.id.OTP);
         verifyOTPBtn = findViewById(R.id.getOTP);
 
+
+
+
         try {
             requestHint();
         } catch (IntentSender.SendIntentException e) {

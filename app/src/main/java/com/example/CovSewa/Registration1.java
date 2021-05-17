@@ -5,6 +5,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,6 +27,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.w3c.dom.Text;
+
+import java.util.ArrayList;
 
 public class Registration1 extends Fragment {
 
@@ -70,6 +74,8 @@ public class Registration1 extends Fragment {
                     getDataFromPinCode(zipcode);
                 }
         });
+
+        initUI(view);
         btnContinue.setOnClickListener(item -> {
             userName = textUserName.getText().toString();
             zipcode = textZipcode.getText().toString();
@@ -179,4 +185,48 @@ public class Registration1 extends Fragment {
         // request to our request queue.
         queue.add(objectRequest);
     }
+
+
+
+    private void initUI(View v)
+    {
+        //UI reference of textView
+        final AutoCompleteTextView customerAutoTV = v.findViewById(R.id.selectCategory);
+
+        // create list of customer
+        ArrayList<String> customerList = getCustomerList();
+
+        //Create adapter
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), R.layout.spinner_item, customerList);
+
+        //Set adapter
+        customerAutoTV.setAdapter(adapter);
+
+        //submit button click event registration
+        v.findViewById(R.id.btnSubmitUserDetails).setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                Toast.makeText(getContext(), customerAutoTV.getText(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private ArrayList<String> getCustomerList()
+    {
+        ArrayList<String> customers = new ArrayList<>();
+        customers.add("James");
+        customers.add("Mary");
+        customers.add("Paul");
+        customers.add("Michael");
+        customers.add("William");
+        customers.add("Daniel");
+        customers.add("Thomas");
+        customers.add("Sarah");
+        customers.add("Sophia");
+        return customers;
+    }
+
+
 }

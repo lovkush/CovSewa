@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingVertical="5dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardProductList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        app:strokeColor="@color/primaryLightColor"
+        app:strokeWidth="2dp"
+        app:cardBackgroundColor="#FEF7FF"
+        app:cardCornerRadius="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:orientation="horizontal"
+            android:weightSum="30">
+            <com.google.android.material.circularreveal.cardview.CircularRevealCardView
+                android:layout_width="100dp"
+                app:cardCornerRadius="10dp"
+                android:layout_margin="5dp"
+                android:elevation="10dp"
+                app:strokeColor="@color/primaryLightColor"
+                app:strokeWidth="3dp"
+                android:background="@drawable/image_border"
+                android:layout_height="100dp">
+
+
+                <ImageView
+                    android:id="@+id/myDonationCardImage"
+                    android:layout_width="110dp"
+                    android:layout_height="100dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/profile_photo" />
+
+
+            </com.google.android.material.circularreveal.cardview.CircularRevealCardView>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="10dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:text="Donation Topic"
+                    android:textSize="20sp"
+                    android:textColor="@color/primaryDarkColor"
+                    android:id="@+id/cardDonationTopic"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Donation Description Donation Description "
+                    android:textSize="18sp"
+                    android:layout_marginLeft="10dp"
+                    android:id="@+id/cardDonationDescription"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:text="Donation Info"
+                    android:textSize="18sp"
+                    android:layout_marginLeft="10dp"
+                    android:id="@+id/cardDonationInfo"/>
+
+            </LinearLayout>
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

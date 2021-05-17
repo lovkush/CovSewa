@@ -71,7 +71,6 @@ public class OnBoarding extends AppCompatActivity{
 
 //Add few items to slider_image_list ,this should contain url of images which should be displayed in slider
 // here i am adding few sample image links, you can add your own
-
         slider_image_list.add("onboarding1");
         slider_image_list.add("onboarding2");
         slider_image_list.add("onboarding3");

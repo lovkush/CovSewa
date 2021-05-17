@@ -10,10 +10,24 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.CovSeva">
+        <!--<activity android:name=".Activities.Splash"
+            android:theme="@style/Theme.Design.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>-->
+        <activity android:name=".Activities.ProductDetails" />
+        <activity android:name=".Activities.Covid19Info" />
+        <activity android:name=".Activities.Review" />
+        <activity android:name=".Activities.RequestList" />
+        <activity android:name=".Activities.ProductList" />
+        <activity android:name=".Activities.Donor" />
         <activity
             android:name=".DashBoard"
             android:label="@string/title_activity_dash_board"
-            android:theme="@style/Theme.CovSeva.NoActionBar">
+            android:theme="@style/themeSplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -22,9 +36,7 @@
         </activity>
         <activity
             android:name=".OnBoarding"
-            android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar">
-
-        </activity>
+            android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar"/>
         <activity
             android:name=".GetUserDetails"
             android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar" />

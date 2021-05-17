@@ -1,22 +1,388 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.myProfile.MyProfileFragment">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:fitsSystemWindows="true"
+        android:orientation="vertical"
+        android:background="@drawable/splash"
+        tools:context=".ui.myProfile.MyProfileFragment">
 
-    <TextView
-        android:id="@+id/text_gallery"
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_centerInParent="true"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:paddingTop="10dp"
+        android:id="@+id/linearLayout"
+        android:background="@color/lightPink">
+
+        <RelativeLayout
+            android:layout_width="130dp"
+            android:layout_height="120dp">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/myCardView"
+                android:layout_width="100dp"
+                android:layout_centerInParent="true"
+                android:layout_height="100dp"
+                app:cardCornerRadius="50dp">
+
+                <ImageView
+                    android:id="@+id/profileimage"
+                    android:layout_width="104dp"
+                    android:layout_height="match_parent"
+                    android:contentDescription="@string/action_settings"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/profile_photo" />
+
+
+            </androidx.cardview.widget.CardView>
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:layout_height="25dp"
+                android:layout_width="25dp"
+                app:backgroundTint="@color/material_on_background_disabled"
+                app:rippleColor="@null"
+                app:fabCustomSize="25dp"
+                android:src="@drawable/ic_baseline_add_24"
+                app:maxImageSize="15dp"
+                android:layout_marginTop="5dp"
+                android:scaleType="center"
+                android:id="@+id/editProfilImage"
+                android:layout_alignParentRight="true" />
+        </RelativeLayout>
+
+
+        <TextView
+            android:id="@+id/userName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="24sp"
+            android:layout_marginBottom="20dp"
+            android:text="Lovkush Singh"
+            android:textColor="@color/primaryDarkColor"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:padding="10dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="Personal Details"
+            android:textSize="30sp"
+            android:textStyle="bold"/>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/userIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:src="@drawable/ic_name"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                android:text="Name"
+                android:textStyle="bold"
+                android:textSize="16dp"
+                android:paddingHorizontal="10dp"
+                android:id="@+id/textUserName"
+                app:layout_constraintStart_toEndOf="@+id/userIcon"/>
+
+            <TextView
+                android:id="@+id/userNameProfile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/textUserName"
+                android:layout_marginTop="4dp"
+                android:text="Lovkush Singh"
+                android:textSize="14dp"
+                android:paddingHorizontal="10dp"
+                app:layout_constraintStart_toEndOf="@+id/userIcon"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:id="@+id/nameEdit"
+                android:src="@drawable/ic_edit2"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_margin="15dp"/>
+
+            <View
+                android:id="@+id/divider"
+                android:layout_width="match_parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_height="2dp"
+                app:layout_constraintStart_toStartOf="parent"
+                android:background="?android:attr/listDivider" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/emailIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:src="@drawable/ic_twotone_mark_email_unread_24"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                android:text="Email"
+                android:textStyle="bold"
+                android:textSize="16dp"
+                android:paddingHorizontal="10dp"
+                android:id="@+id/textEmail"
+                app:layout_constraintStart_toEndOf="@+id/emailIcon"/>
+
+            <TextView
+                android:id="@+id/userEmailProfile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/textEmail"
+                android:layout_marginTop="4dp"
+                android:text="lovkushsingh15@gmail.com"
+                android:textSize="14dp"
+                android:paddingHorizontal="10dp"
+                app:layout_constraintStart_toEndOf="@+id/emailIcon"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:id="@+id/emalEdit"
+                android:src="@drawable/ic_edit2"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_margin="15dp"/>
+
+            <View
+                android:id="@+id/divider2"
+                android:layout_width="match_parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_height="2dp"
+                app:layout_constraintStart_toStartOf="parent"
+                android:background="?android:attr/listDivider" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/addIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:src="@drawable/ic_twotone_home_24"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                android:text="Address"
+                android:textStyle="bold"
+                android:textSize="16dp"
+                android:paddingHorizontal="10dp"
+                android:id="@+id/textAdd"
+                app:layout_constraintStart_toEndOf="@+id/addIcon"/>
+
+            <TextView
+                android:id="@+id/userAddProfile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/textAdd"
+                android:layout_marginTop="4dp"
+                android:text="Home no 80 sector 6 vikas nagar, Lucknow, 226022"
+                android:textSize="14dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:paddingHorizontal="10dp"
+                android:maxWidth="280dp"
+                android:layout_marginBottom="10dp"
+                app:layout_constraintStart_toEndOf="@+id/addIcon"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:id="@+id/addEdit"
+                android:src="@drawable/ic_edit2"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_margin="15dp"/>
+
+            <View
+                android:id="@+id/divider3"
+                android:layout_width="match_parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_height="2dp"
+                app:layout_constraintStart_toStartOf="parent"
+                android:background="?android:attr/listDivider" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/phoneIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:src="@drawable/ic_twotone_phone_iphone_24"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textphone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:paddingHorizontal="10dp"
+                android:text="Contact"
+                android:textSize="16dp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/phoneIcon"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/userPhoneProfile"/>
+
+            <TextView
+                android:id="@+id/userPhoneProfile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/textphone"
+                android:layout_marginTop="4dp"
+                android:text="+91 9044527275"
+                android:textSize="14dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:paddingHorizontal="10dp"
+                android:maxWidth="400dp"
+                android:layout_marginBottom="10dp"
+                app:layout_constraintStart_toEndOf="@+id/phoneIcon"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:id="@+id/phoneEdit"
+                android:src="@drawable/ic_edit2"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_margin="15dp"/>
+
+            <View
+                android:id="@+id/divider4"
+                android:layout_width="match_parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_height="2dp"
+                app:layout_constraintStart_toStartOf="parent"
+                android:background="?android:attr/listDivider" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/TypeIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:src="@drawable/ic_twotone_phone_iphone_24"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:paddingHorizontal="10dp"
+                android:text="User Type"
+                android:textSize="16dp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/TypeIcon"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/userTypeProfile"/>
+
+            <TextView
+                android:id="@+id/userTypeProfile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/textType"
+                android:layout_marginTop="4dp"
+                android:text="Organisation"
+                android:textSize="14dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:paddingHorizontal="10dp"
+                android:maxWidth="400dp"
+                android:layout_marginBottom="10dp"
+                app:layout_constraintStart_toEndOf="@+id/TypeIcon"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:id="@+id/TypeEdit"
+                android:src="@drawable/ic_edit2"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_margin="15dp"/>
+
+            <View
+                android:id="@+id/divider5"
+                android:layout_width="match_parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_height="2dp"
+                app:layout_constraintStart_toStartOf="parent"
+                android:background="?android:attr/listDivider" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
+
+
+
+
+
+</LinearLayout>
