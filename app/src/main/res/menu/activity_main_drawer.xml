@@ -30,6 +30,11 @@
             android:icon="@drawable/ic_menu_slideshow"
             android:title="@string/terms" />
 
+        <item
+            android:id="@+id/nav_privacy_policy"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Privacy Policy" />
+
         <item android:id="@+id/logout"
             android:title="@string/logout"
             />

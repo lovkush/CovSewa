@@ -20,7 +20,6 @@
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
     <string name="my_profile">My Profile</string>
-    <string name="request_list">Request List</string>
     <string name="my_donation">My donation</string>
     <string name="about_us">About Us</string>
     <string name="support_us">Support Us</string>
@@ -34,5 +33,33 @@
     <string name="open">Open</string>
     <string name="close">Close</string>
     <string name="logout">Logout</string>
+    <string name="request_review">Request Review</string>
+    <string name="request_list">Request List</string>
+    <string name="totalRequest">Total Request :</string>
+    <string name="donate_contribute">Donate / Contribute</string>
+    <string name="select_category">Select Category</string>
+    <string name="disclaimer">Disclaimer:
+        All information in this Application is provided "as is", with no guarantee of completeness, accuracy, timeliness or of the results obtained from the use of this information, and without warranty of any kind, express or implied, including, but not limited to warranties of performance, merchantability and fitness for a particular purpose.
+
+        The information uploaded by the users is expected to be verified information. No information uploaded on the application is verified by the app developer, its owners etc.
+
+        The owners of this application will not be liable to the users or anyone else for any decision made or action taken in reliance of the information provided through this application.
+
+        The owners of this application assume no responsibility for any errors or omissions in the contents of the service. The service provided through this application is a philanthropic work and has been done pro bono in view of the present pandemic situation all over India.
+
+        In no event shall the owners of this application be liable for any special, direct, indirect, consequential, or incidental damages or any damages whatsoever, whether in an action of contract, negligence or other tort, arising out of or in connection with the use of this application or the contents of the application. The owners of this application reserve the right to make additions, deletions, or modifications to the contents on the application at any time without prior notice.
+
+        The application may contain reviews which are those of the users and do not necessarily reflect the official policy or position of any other agency, Government, Hospital, organization, employer or company, including the application.
+
+        Reviews published by users are their sole responsibility and the users will take full responsibility, liability and blame for any libel or litigation that results from something written in or as a direct result of something written in a comment. The owners of this application are not liable for any comment published by users and reserve the right to delete any comment for any reason whatsoever. The owners of this application are intermediaries within the meaning of Information Technology Act. The owners cannot be sued in any litigation or any complaint be filed against them whether civil or criminal.
+
+        This content provided on this application should not be constituted as a medical advice or any substitute to medical advice. Users of this application should consult their healthcare professional before making any medical or other decisions based upon the data contained herein.
+
+        The application may contain links to external websites that are not provided or maintained by or in any way affiliated with the owners of this application. Further the owners of this application do not guarantee the accuracy, relevance, timeliness, or completeness of any information on these external websites.\n\n\n\n\n\n\n\n
+                                                                                                                                                                                                                                                                                 .
+    </string>
+    <string name="title_activity_request_recieved">RequestRecieved</string>
+    <string name="tab_text_1">Tab 1</string>
+    <string name="tab_text_2">Tab 2</string>
 
 </resources>

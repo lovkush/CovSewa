@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Activities.ProductList"
-    android:background="@drawable/splash">
+    tools:context=".Activities.ProductList">
 
     <com.google.android.material.textfield.TextInputLayout
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -23,8 +22,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingHorizontal="10dp"
-            android:hint="Select Area"
-            android:inputType="textEmailAddress" />
+            android:hint="Delhi"
+            android:editable="false"
+            android:inputType="none" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -38,21 +38,31 @@
         app:boxBackgroundColor="@color/backgroundColor">
 
         <AutoCompleteTextView
-            android:id="@+id/textUserName"
+            android:id="@+id/textCategory"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingHorizontal="10dp"
-            android:hint="Select Category"
-            android:inputType="textEmailAddress" />
+            android:hint="Select Product Category"
+            android:editable="false"
+            android:inputType="none" />
     </com.google.android.material.textfield.TextInputLayout>
-    <include
-        layout="@layout/donation_card"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_marginTop="10dp"
+        android:layout_marginHorizontal="@dimen/activity_horizontal_margin_Small"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/donationRecycler"
+        android:id="@+id/productRecycler"
         tools:itemCount="6"
+        android:visibility="gone"
         tools:listitem="@layout/donation_card"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text ="Nothing available"
+        android:gravity="center"
+        android:textSize="20sp"
+        android:paddingVertical="20dp"
+        android:id="@+id/textProductList"/>
 </LinearLayout>

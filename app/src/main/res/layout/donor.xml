@@ -17,16 +17,16 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         app:endIconMode="dropdown_menu"
-        app:endIconDrawable="@drawable/ic_baseline_keyboard_arrow_down_24"
         app:boxBackgroundColor="@color/backgroundColor">
 
         <AutoCompleteTextView
-            android:id="@+id/textUserName"
+            android:id="@+id/selectProductCategory"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:editable="false"
+            android:inputType="none"
             android:paddingHorizontal="10dp"
-            android:hint="Select Category"
-            android:inputType="textEmailAddress" />
+            android:hint="@string/select_category"/>
     </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -80,6 +80,24 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        app:endIconMode="dropdown_menu"
+        app:boxBackgroundColor="@color/backgroundColor">
+
+        <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+            android:id="@+id/productTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Address Line 2"
+            android:paddingVertical="17dp"
+            android:paddingHorizontal="10dp"
+            android:inputType="none" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginVertical="10dp"
         app:boxBackgroundColor="@color/backgroundColor">
 
@@ -87,12 +105,11 @@
             android:id="@+id/textDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="top|start"
             android:hint="Enter Description (50 words)"
             android:inputType="textMultiLine"
-            android:lines="8"
-            android:minLines="6"
-            android:gravity="top|start"
-            android:maxLines="10"
+            android:lines="5"
+            android:maxLines="8"
             android:scrollbars="vertical" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -102,9 +119,10 @@
         android:layout_height="wrap_content"
         android:text="Add Images"
         android:layout_marginHorizontal="10dp"
-        android:layout_marginVertical="20dp"
-        android:textSize="25sp"/>
+        android:layout_marginVertical="10dp"
+        android:textSize="20sp"/>
     <LinearLayout
+        android:id="@+id/imageViewProduct"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -178,19 +196,17 @@
             android:src="@drawable/ic_twotone_image_24" />
     </com.google.android.material.circularreveal.cardview.CircularRevealCardView>
 
-
-
-
     </LinearLayout>
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnSubmitUserDetails"
+        android:id="@+id/btnSubmitProductDetail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:padding="15dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginHorizontal="40dp"
+        android:padding="10dp"
         android:text="Continue"
-        android:textSize="20sp"
+        android:textSize="15sp"
         app:cornerRadius="15dp" />
 
 

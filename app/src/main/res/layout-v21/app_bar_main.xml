@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:theme="@style/Theme.CovSeva"
     android:layout_height="match_parent"
-    tools:context=".DashBoard">
+    tools:context=".Activities.DashBoard">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout2"
@@ -80,7 +80,6 @@
             app:titleTextColor="@color/white"
             android:visibility="gone" />
     </com.google.android.material.appbar.AppBarLayout>
-
 
     <include
         layout="@layout/content_main" />
