@@ -5,15 +5,21 @@ import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.Html;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,7 +27,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.viewpager.widget.ViewPager;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.vector.CovSewa.Activities.ui.main.ImageSliderAdapter;
+import com.vector.CovSewa.OnBoarding;
 import com.vector.CovSewa.ProductData;
 import com.vector.CovSewa.R;
 import com.vector.CovSewa.RequestData;
@@ -31,7 +44,12 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.vector.CovSewa.SliderPagerAdapter;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.Objects;
 
 import static android.content.ContentValues.TAG;
@@ -39,11 +57,21 @@ import static android.content.ContentValues.TAG;
 public class ProductDetails extends AppCompatActivity {
 
     private ImageView profileImage,call;
-    private TextView ProductTitle,ProductDescription,Area,requestTitle,requestContact,requestDescription;
+    private TextView ProductTitle,ProductDescription,Area,requestTitle,requestContact,requestDescription,time;
     private ProductData productData= new ProductData();
     private Button requestButton,requestPopupButton;
     String productId,UID,textRequestTitle,textRequestContact,textRequestDescription;
     private Dialog fbDialogue;
+    private int count =0;
+
+    private ViewPager vp_slider;
+    private LinearLayout ll_dots;
+    ImageSliderAdapter sliderPagerAdapter;
+    ArrayList<String> slider_image_list;
+    private TextView[] dots;
+    int page_position = 0;
+    private ArrayList<Bitmap> bitmaps = new ArrayList<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +87,7 @@ public class ProductDetails extends AppCompatActivity {
         Area = findViewById(R.id.productArea);
         call= findViewById(R.id.call);
         requestButton = findViewById(R.id.requestProduct);
-
+        time = findViewById(R.id.time);
 
         Intent intent = getIntent();
         productId = intent.getStringExtra("ProductId");
@@ -72,9 +100,10 @@ public class ProductDetails extends AppCompatActivity {
         fbDialogue.setContentView(R.layout.popup);
         fbDialogue.setCancelable(true);
 
+        Log.d(TAG, "onCreate: donorid"+UID+productData.getDonorId());
         requestButton.setOnClickListener(v->{
-            if(!validateUser()){
-                Toast.makeText(ProductDetails.this,"Request Made.",Toast.LENGTH_LONG).show();
+            if(UID.equals(productData.getDonorId())){
+                Toast.makeText(ProductDetails.this,"Cant Request Your Own Product",Toast.LENGTH_LONG).show();
             }else {
                     fbDialogue.show();
             }
@@ -84,7 +113,6 @@ public class ProductDetails extends AppCompatActivity {
         requestContact = fbDialogue.findViewById(R.id.requestContact);
         requestDescription = fbDialogue.findViewById(R.id.textDescription);
         requestPopupButton =  fbDialogue.findViewById(R.id.btnSubmitRequestDetail);
-
         requestPopupButton.setOnClickListener(v->{
             generateRequest();
         });
@@ -117,16 +145,22 @@ public class ProductDetails extends AppCompatActivity {
     private void setView(){
         ProductTitle.setText(productData.getProductTitle());
         Area.setText(productData.getAddLine2().split(",")[0]);
+        count = productData.getImageCount();
         ProductDescription.setText(productData.getDescription());
+        DateFormat formatter = new SimpleDateFormat("hh:mm dd MMM");
+        Date date = new Date(productData.getTimestamp());
+        time.setText(formatter.format(date));
+        init();
+        addBottomDots(0);
         if(productData.getContact()!=null){
             call.setVisibility(View.VISIBLE);
             call.setOnClickListener(v->{
                 Intent callIntent = new Intent(Intent.ACTION_CALL);
-                callIntent.setData(Uri.parse(productData.getContact()));
-                if (ActivityCompat.checkSelfPermission(ProductDetails.this,
+                callIntent.setData(Uri.parse("tel:" + productData.getContact()));
+                /*if (ActivityCompat.checkSelfPermission(ProductDetails.this,
                         Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
                     return;
-                }
+                }*/
                 startActivity(callIntent);
             });
         }
@@ -165,23 +199,6 @@ public class ProductDetails extends AppCompatActivity {
 
     }
 
-    boolean status;
-    private boolean validateUser(){
-        status = true;
-            FirebaseDatabase.getInstance().getReference("Request/").orderByChild("doneeId").equalTo(UID).addValueEventListener(new ValueEventListener() {
-
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    status=  false;
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-
-                }
-            });
-            return status;
-    }
 
     private boolean validate(){
         if(requestDescription.getText()==null||requestDescription.getText().toString().length()<30){
@@ -200,6 +217,81 @@ public class ProductDetails extends AppCompatActivity {
             return false;
         }
         return true;
+    }
+
+
+
+    private void init() {
+
+        vp_slider = (ViewPager) findViewById(R.id.vp_slider);
+        ll_dots = (LinearLayout) findViewById(R.id.ll_dots);
+
+        slider_image_list = new ArrayList<>();
+        bitmaps.clear();
+        while (count>0){
+            count--;
+            setImage(productData.getTimestamp()+productData.getDonorId()+count);
+        }
+
+        sliderPagerAdapter = new ImageSliderAdapter(ProductDetails.this, bitmaps,ProductDetails.this);
+        vp_slider.setAdapter(sliderPagerAdapter);
+        sliderPagerAdapter.notifyDataSetChanged();
+
+        vp_slider.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                page_position = position;
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                addBottomDots(position);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+    }
+
+    private void addBottomDots(int currentPage) {
+        dots = new TextView[slider_image_list.size()];
+
+        ll_dots.removeAllViews();
+        for (int i = 0; i < dots.length; i++) {
+            dots[i] = new TextView(this);
+            dots[i].setText(Html.fromHtml("&#8226;"));
+            dots[i].setTextSize(35);
+            dots[i].setTextColor(Color.parseColor("#000000"));
+            ll_dots.addView(dots[i]);
+        }
+
+        if (dots.length > 0)
+            dots[currentPage].setTextColor(Color.parseColor("#FFFFFF"));
+    }
+
+    private void setImage(String userPhoto) {
+        StorageReference storageReference = FirebaseStorage.getInstance().getReference();
+        if(userPhoto==null)
+            return;
+        StorageReference photoReference= storageReference.child("Product").child(userPhoto);
+        Log.d(TAG, "setImage: " + photoReference);
+        final long ONE_MEGABYTE = 1024 * 1024;
+        photoReference.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+            @Override
+            public void onSuccess(byte[] bytes) {
+                Bitmap bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                bitmaps.add(bmp);
+                sliderPagerAdapter.notifyDataSetChanged();
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                Toast.makeText(ProductDetails.this, "No Such file or Path found!!", Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
 }

@@ -16,25 +16,30 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.CovSeva">
-        <activity android:name=".Activities.RequestDetails"></activity>
+        <activity android:name=".Activities.EditProfile"></activity>
+        <activity android:name=".Activities.ProfileActivity" />
+        <activity android:name=".Activities.MyProduct" />
+        <activity android:name=".Activities.CovidInfo" />
+        <activity android:name=".Activities.DonationReview" />
+        <activity android:name=".Activities.AppReview" />
+        <activity android:name=".Activities.RequestDetails" />
         <activity
             android:name=".Activities.RequestReceived"
             android:label="@string/title_activity_request_recieved"
-            android:theme="@style/Theme.CovSeva.NoActionBar"/>
+            android:theme="@style/Theme.CovSeva.NoActionBar" />
         <activity android:name=".Activities.Account" />
-
         <activity android:name=".Activities.ProductDetails" />
-        <activity android:name=".Activities.Covid19Info" />
+        <activity android:name=".Activities.Covid19Info"></activity>
         <activity android:name=".Activities.Review" />
-        <activity android:name=".Activities.RequestList" >
-        </activity>
+        <activity android:name=".Activities.RequestList" />
         <activity android:name=".Activities.RequestSent" />
         <activity android:name=".Activities.ProductList" />
+        <activity android:name=".Activities.ProductDetails2" />
         <activity android:name=".Activities.Donor" />
         <activity
             android:name=".Activities.DashBoard"
             android:label="@string/title_activity_dash_board"
-            android:theme="@style/Theme.CovSeva.NoActionBar" >
+            android:theme="@style/Theme.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

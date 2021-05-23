@@ -18,6 +18,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
@@ -40,6 +41,7 @@ public class RequestReceived extends AppCompatActivity  {
     TabLayout tabLayout;
     ViewPager viewPager;
     Context context;
+    String UID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +51,8 @@ public class RequestReceived extends AppCompatActivity  {
         setSupportActionBar(toolbar);
         defineView();
         bindView();
+
+        UID = FirebaseAuth.getInstance().getUid();
     }
     private void defineView(){
         tabLayout=findViewById(R.id.tab_layout);
@@ -66,7 +70,6 @@ public class RequestReceived extends AppCompatActivity  {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         //  adapter.addFragment(new CuriosityModeFeatured(),"Featured");
         new PlaceholderFragment();
-        Log.d(TAG, "setupViewPager: " + requestList.get(0).getTopic());
         adapter.addFragment(PlaceholderFragment.newInstance(requestList), "Received");
         new PlaceholderFragment();
         adapter.addFragment(PlaceholderFragment.newInstance(requestList1),"Saved");
@@ -75,12 +78,18 @@ public class RequestReceived extends AppCompatActivity  {
 
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
+
     private List<RequestData> requestList=new ArrayList<>();
     private List<RequestData> requestList1=new ArrayList<>();
 
     private void setUpRequestList(){
 
-        FirebaseDatabase.getInstance().getReference().child("Request").orderByChild("donorId").equalTo("uBeFIgd2NCT2e7fCdStDdBEBKTG2").addValueEventListener(new ValueEventListener() {
+        FirebaseDatabase.getInstance().getReference().child("Request").orderByChild("donorId").equalTo(UID).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 requestList.clear();
@@ -91,7 +100,9 @@ public class RequestReceived extends AppCompatActivity  {
                     requestList.add(snapshot.getValue(RequestData.class));
                     Log.d(TAG, "onDataChange: " + snapshot.getValue(RequestData.class).getDoneeId());
                 }
+                if(requestList.size()==0){
 
+                }
                 setUpSavedList();
             }
 
@@ -105,7 +116,6 @@ public class RequestReceived extends AppCompatActivity  {
         requestList1.clear();
             for(RequestData r : requestList)
                 if(r.isSaveStatus())requestList1.add(r);
-
                 setupViewPager(viewPager);
     }
 

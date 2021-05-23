@@ -1,5 +1,6 @@
 package com.vector.CovSewa.ui.myProfile;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -14,6 +15,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import com.vector.CovSewa.Activities.EditProfile;
 import com.vector.CovSewa.R;
 import com.vector.CovSewa.UserData;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -32,19 +34,29 @@ import static android.content.ContentValues.TAG;
 public class MyProfileFragment extends Fragment {
 
     private UserData value;
-    private TextView userNameText, emailText, addressText, contactText,userTypeText;
+    private TextView userNameText, emailText, addressText, contactText,userTypeText,userNameText2;
     private ImageView imageView;
     private String userName, email, addressLine1,addressLine2, contact,userType;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_my_profile, container, false);
+        userNameText2 = root.findViewById(R.id.userName);
         userNameText = root.findViewById(R.id.userNameProfile);
         emailText = root.findViewById(R.id.userEmailProfile);
         addressText = root.findViewById(R.id.userAddProfile);
         contactText = root.findViewById(R.id.userPhoneProfile);
         userTypeText = root.findViewById(R.id.userTypeProfile);
         imageView = root.findViewById(R.id.profileimage);
+        root.findViewById(R.id.editProfile).setOnClickListener(v->{
+            if(value!=null){
+                Intent intent = new Intent(getContext(), EditProfile.class);
+                intent.putExtra("user",value);
+                startActivity(intent);
+            }
+
+        });
+
 
         prepareData();
         return root;
@@ -72,6 +84,7 @@ public class MyProfileFragment extends Fragment {
         });
     }
     public void setData(UserData s){
+        userNameText2.setText(s.getName());
         userNameText.setText(s.getName());
         emailText.setText(s.getEmail());
         addressText.setText(String.format("%s,%s", s.getAddLine1(), s.getAddLine2()));
@@ -97,5 +110,9 @@ public class MyProfileFragment extends Fragment {
                 Toast.makeText(getContext(), "No Such file or Path found!!", Toast.LENGTH_LONG).show();
             }
         });
+    }
+
+    private void edit(){
+
     }
 }

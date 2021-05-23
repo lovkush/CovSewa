@@ -19,6 +19,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,6 +30,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.ValueEventListener;
 import com.vector.CovSewa.ProductData;
 import com.vector.CovSewa.R;
 import com.vector.CovSewa.UploadPhoto;
@@ -43,6 +46,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.vector.CovSewa.UserData;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -55,18 +59,20 @@ public class Donor extends AppCompatActivity {
     private TextView textTitle, textDescription, textZipcode, textAdd1;
     AutoCompleteTextView textAdd2 ;
     private RequestQueue mRequestQueue;
-    private AutoCompleteTextView customerAutoTV;
+    private AutoCompleteTextView categoryList;
     ImageView[] imageView = new ImageView[4];
     int imageCount=0;
     private String category,UID,description,zipcode,add1,add2,productId,title;
-    FirebaseAuth mAuth;
     ProductData productData = new ProductData();
     long timestamp;
+    private CheckBox contactCheckBox ;
+    private UserData userData;
 
-    private ArrayList<String> area = new ArrayList<>();
+    private final ArrayList<String> area = new ArrayList<>();
     FirebaseStorage storage;
     StorageReference storageReference;
     DatabaseReference reference;
+    FirebaseAuth mAuth;
 
     @SuppressLint("ClickableViewAccessibility")
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -78,8 +84,12 @@ public class Donor extends AppCompatActivity {
         getSupportActionBar().setTitle("Enter Details");
 
         UID = FirebaseAuth.getInstance().getUid();
+        storage = FirebaseStorage.getInstance();
+        storageReference = storage.getReference();
+        reference = FirebaseDatabase.getInstance().getReference();
 
         mRequestQueue = Volley.newRequestQueue(Donor.this);
+        getUserData();
 
         textDescription = findViewById(R.id.textDescription);
         textAdd1 = findViewById(R.id.textAddLine1);
@@ -90,19 +100,17 @@ public class Donor extends AppCompatActivity {
         imageView[1] = findViewById(R.id.donorImg2);
         imageView[2] = findViewById(R.id.donorImg3);
         imageView[3] = findViewById(R.id.donorImg4);
+        contactCheckBox = findViewById(R.id.callAvailability);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.spinner_item, area);
         textAdd2.setAdapter(adapter);
         timestamp = System.currentTimeMillis();
         productId = timestamp + UID;
 
-        View v = findViewById(R.id.imageViewProduct);
-        v.setOnClickListener(v1->{
+        //Listener For Image Upload
+        findViewById(R.id.imageViewProduct).setOnClickListener(v1->{
             Intent intent = new Intent(Donor.this, UploadPhoto.class);
             startActivityForResult(intent,2);
         });
-
-        mAuth = FirebaseAuth.getInstance();
-
         textAdd1.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -116,14 +124,6 @@ public class Donor extends AppCompatActivity {
                 return false;
             }
         });
-
-        storage = FirebaseStorage.getInstance();
-        storageReference = storage.getReference();
-        reference = FirebaseDatabase.getInstance().getReference();
-        initUI();
-
-
-
     }
 
     @Override
@@ -141,8 +141,8 @@ public class Donor extends AppCompatActivity {
             return result;
         }
         if(category==null){
-            customerAutoTV.setError("Select a category");
-            customerAutoTV.requestFocus();
+            categoryList.setError("Select a category");
+            categoryList.requestFocus();
             return result;
         }
         if(zipcode==null){
@@ -245,17 +245,16 @@ public class Donor extends AppCompatActivity {
 
     private void initUI()
     {
-        //UI reference of textView
-        customerAutoTV = findViewById(R.id.selectProductCategory);
+        categoryList = findViewById(R.id.selectProductCategory);
 
         // create list of customer
-        ArrayList<String> customerList = getCustomerList();
+        ArrayList<String> customerList = getCategoryList();
 
         //Create adapter
         ArrayAdapter<String> adapter = new ArrayAdapter<>(Donor.this, R.layout.spinner_item, customerList);
 
         //Set adapter
-        customerAutoTV.setAdapter(adapter);
+        categoryList.setAdapter(adapter);
 
         //submit button click event registration
         findViewById(R.id.btnSubmitProductDetail).setOnClickListener(new View.OnClickListener()
@@ -267,7 +266,7 @@ public class Donor extends AppCompatActivity {
                 zipcode = textZipcode.getText().toString();
                 add1 = textAdd1.getText().toString();
                 add2 = textAdd2.getText().toString();
-                category = customerAutoTV.getText().toString();
+                category = categoryList.getText().toString();
                 title = textTitle.getText().toString();
                 if(verifyData()){
                     productData.setDescription(description);
@@ -280,6 +279,9 @@ public class Donor extends AppCompatActivity {
                     productData.setCategory(category);
                     productData.setImageCount(imageCount);
                     productData.setProductTitle(title);
+                    productData.setDonorId(UID);
+                    if(contactCheckBox.isChecked()||!userData.getCategory().equals("Individual"))
+                        productData.setContact(userData.getContact());
                     //initUI();
                     update();
                 }
@@ -287,7 +289,7 @@ public class Donor extends AppCompatActivity {
         });
     }
 
-    private ArrayList<String> getCustomerList()
+    private ArrayList<String> getCategoryList()
     {
         ArrayList<String> customers = new ArrayList<>();
         customers.add("Non Prescription Medicines");
@@ -412,6 +414,20 @@ public class Donor extends AppCompatActivity {
         }
     }
 
+    private void getUserData(){
+        reference.child("User").child(UID).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                userData = snapshot.getValue(UserData.class);
+                initUI();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
 
     private void update(){
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Product");

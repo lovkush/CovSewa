@@ -16,6 +16,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.view.GravityCompat;
@@ -29,6 +30,7 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import com.google.android.material.appbar.AppBarLayout;
 import com.vector.CovSewa.OnBoarding;
 import com.vector.CovSewa.R;
 import com.vector.CovSewa.SignInActivity;
@@ -60,12 +62,10 @@ import static android.content.ContentValues.TAG;
 
 public class DashBoard extends AppCompatActivity  {
 
-    private AppBarConfiguration mAppBarConfiguration;
-
-    Fragment currentFragment = new HomeFragment(),fragment;
-    String title,UID,email;
-    Toolbar toolbar;
-    ConstraintLayout appBarLayout;
+    private Fragment currentFragment = new HomeFragment(),fragment;
+    private String title,UID,email;
+    private Toolbar toolbar;
+    private ConstraintLayout appBarLayout;
     private ImageView appBarImageView,navBarImageView;
     private UserData value;
     TextView userName,userEmail;
@@ -73,41 +73,44 @@ public class DashBoard extends AppCompatActivity  {
     TextView appbarEmail, appbarName;
     @Override
     public void onBackPressed() {
-
-        super.onBackPressed();
+        setFragment(new HomeFragment());
+        toolbar.setVisibility(View.GONE);
+        appBarLayout.setVisibility(View.VISIBLE);
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         if (mAuth.getCurrentUser() == null) {
-            Log.d("UID", "onCreate: null");
-
             startActivity(new Intent(this, OnBoarding.class));
             finish();
         } else {
-            UID = mAuth.getCurrentUser().getUid();
-            email = mAuth.getCurrentUser().getEmail();
-            Log.d("UID", "onCreate: "+UID);
+            if(mAuth.getCurrentUser().getEmail().equals("")){
+                startActivity(new Intent(this, OnBoarding.class));
+                finish();
+            }else {
+                UID = mAuth.getCurrentUser().getUid();
+                email = mAuth.getCurrentUser().getEmail();
+            }
         }
         prepareData();
 
-        //setTheme(R.style.Theme_CovSeva);
+        setTheme(R.style.CovSeva_NoActionBar);
         setContentView(R.layout.dash_board);
         toolbar = findViewById(R.id.toolbar);
+        appBarLayout = findViewById(R.id.appBarLayout);
         setSupportActionBar(toolbar);
         toolbar.setBackground(new ColorDrawable(getResources().getColor(R.color.primaryColor)));
+
         toolbar.setNavigationOnClickListener(view -> {
             setFragment(new HomeFragment());
             toolbar.setVisibility(View.GONE);
             appBarLayout.setVisibility(View.VISIBLE);
         });
 
-        View v1 = findViewById(R.id.appBarLayout);
-        appBarImageView = v1.findViewById(R.id.appbarImage);
+        appBarImageView = appBarLayout.findViewById(R.id.appbarImage);
 
         setFragment(new HomeFragment());
 
@@ -135,14 +138,7 @@ public class DashBoard extends AppCompatActivity  {
          userName = headerView.findViewById(R.id.navHeaderUserName);
          userEmail = headerView.findViewById(R.id.navHeaderUserEmail);
          navBarImageView = headerView.findViewById(R.id.navbarImage);
-
-
-
-
-
-
-        appBarLayout = findViewById(R.id.appBarLayout);
-
+         
         appBarLayout.setBackground(new ColorDrawable(getResources().getColor(R.color.app_barColor)));
         fragment = new HomeFragment() ;
 
@@ -239,13 +235,13 @@ public class DashBoard extends AppCompatActivity  {
     }
 
 
-    @Override
+   /* @Override
     public boolean onSupportNavigateUp() {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
     }
-
+*/
     private void setFragment( Fragment fragment){
         if(fragment!=currentFragment){
             FragmentManager fragmentManager = getSupportFragmentManager();
@@ -262,17 +258,19 @@ public class DashBoard extends AppCompatActivity  {
     }
 
     private void prepareData(){
+        Log.d(TAG, "prepareData: ");
         DatabaseReference myRef = FirebaseDatabase.getInstance().getReference().child("User").child(UID);
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
-
+                value = dataSnapshot.getValue(UserData.class);
                 if(value!=null){
-                    value = dataSnapshot.getValue(UserData.class);
                     userEmail.setText(email);
                     userName.setText(value.getName());
+                    appbarEmail.setText(email);
+                    appbarName.setText(value.getName());
                     setImage("ProfileImage/"+value.getContact());
                     UserDataViewModel viewModel = new ViewModelProvider(DashBoard.this).get(UserDataViewModel.class);
                     viewModel.selectItem(value);

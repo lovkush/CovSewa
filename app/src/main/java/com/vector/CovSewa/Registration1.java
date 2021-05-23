@@ -92,6 +92,31 @@ public class Registration1 extends Fragment {
         editImage = view.findViewById(R.id.editProfilImage);
         imageView = view.findViewById(R.id.profileimage);
 
+       textZipcode.addTextChangedListener(new TextWatcher() {
+           @Override
+           public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+           }
+
+           @Override
+           public void onTextChanged(CharSequence s, int start, int before, int count) {
+                    if(s.length()==6){
+                        //zipcode = textZipcode.getText().toString();
+                       /* if (zipcode.trim().length() < 6) {
+                            textZipcode.setError("Enter a Valid zipcode");
+                            textZipcode.requestFocus();
+                        } else {*/
+                            getDataFromPinCode(zipcode);
+                        //}
+                    }
+
+           }
+
+           @Override
+           public void afterTextChanged(Editable s) {
+
+           }
+       });
         viewModel = new ViewModelProvider(requireActivity()).get(UserDataViewModel.class);
 
         mAuth = FirebaseAuth.getInstance();
@@ -109,6 +134,16 @@ public class Registration1 extends Fragment {
                     getDataFromPinCode(zipcode);
                 }
                 return false;
+            }
+        });
+
+        textSignIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseAuth.getInstance().signOut();
+                Intent intent = new Intent(getContext(),SignInActivity.class);
+                getActivity().finish();
+                    startActivity(intent);
             }
         });
 
@@ -261,9 +296,9 @@ public class Registration1 extends Fragment {
     {
         ArrayList<String> customers = new ArrayList<>();
         customers.add("Individual");
-        customers.add("NGO");
-        customers.add("....");
-        customers.add(".....");
+        customers.add("NGO/Trust/Organisation");
+        customers.add("Supplier");
+        customers.add("Other");
         return customers;
     }
 

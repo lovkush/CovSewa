@@ -13,9 +13,12 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.vector.CovSewa.Activities.Account;
+import com.vector.CovSewa.Activities.Covid19Info;
 import com.vector.CovSewa.Activities.Donor;
 import com.vector.CovSewa.Activities.ProductList;
 import com.vector.CovSewa.Activities.RequestList;
+import com.vector.CovSewa.Activities.Review;
 import com.vector.CovSewa.R;
 
 public class HomeFragment extends Fragment  {
@@ -34,11 +37,28 @@ public class HomeFragment extends Fragment  {
             }
         });
 
-        CardView donorCard, doneeCard, requestCard;
+        CardView donorCard, doneeCard, requestCard, reviewCard,account,covidInfo;
 
         donorCard = root.findViewById(R.id.cardDonor);
         doneeCard = root.findViewById(R.id.cardDonee);
         requestCard = root.findViewById(R.id.cardRequest);
+        reviewCard = root.findViewById(R.id.cardReview);
+        account = root.findViewById(R.id.cardAccount);
+        covidInfo = root.findViewById(R.id.cardInfo);
+        reviewCard.setOnClickListener(v->{
+            Intent intent = new Intent(getActivity(), Review.class);
+            startActivity(intent);
+        });
+
+        account.setOnClickListener(v->{
+            Intent intent = new Intent(getActivity(), Account.class);
+            startActivity(intent);
+        });
+
+        covidInfo.setOnClickListener(v->{
+            Intent intent = new Intent(getActivity(), Covid19Info.class);
+            startActivity(intent);
+        });
 
         doneeCard.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,7 +70,7 @@ public class HomeFragment extends Fragment  {
         donorCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getActivity().finish();
+                //getActivity().finish();
                 Intent intent = new Intent(getActivity(), Donor.class);
                 startActivity(intent);
             }

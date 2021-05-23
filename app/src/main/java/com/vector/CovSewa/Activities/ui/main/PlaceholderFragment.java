@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -27,6 +28,7 @@ import static android.content.ContentValues.TAG;
  */
 public class PlaceholderFragment extends Fragment implements RequestListAdapter.OnCardClickListener{
     RecyclerView showReviewList;
+    TextView textView;
 
     //  private OnFragmentInteractionListener mListener;
 
@@ -65,13 +67,23 @@ public class PlaceholderFragment extends Fragment implements RequestListAdapter.
     }
 
     private void defineView(View view) {
+
+        textView = view.findViewById(R.id.textView);
         showReviewList = view.findViewById(R.id.RequestRecycler);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
-        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        showReviewList.setLayoutManager(layoutManager);
-        listAdapter = new RequestListAdapter(requestList,this);
-        showReviewList.setAdapter(listAdapter);
-        listAdapter.notifyDataSetChanged();
+        if(requestList.size()==0){
+            textView.setVisibility(View.VISIBLE);
+            showReviewList.setVisibility(View.GONE);
+        }else {
+            textView.setVisibility(View.GONE);
+            showReviewList.setVisibility(View.VISIBLE);
+            LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+            layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+            showReviewList.setLayoutManager(layoutManager);
+            listAdapter = new RequestListAdapter(requestList,this);
+            showReviewList.setAdapter(listAdapter);
+            listAdapter.notifyDataSetChanged();
+        }
+
     }
 
 

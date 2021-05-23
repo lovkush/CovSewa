@@ -13,10 +13,10 @@
             android:id="@+id/nav_donation"
             android:icon="@drawable/ic_menu_gallery"
             android:title="@string/my_donation" />
-        <item
+        <!--<item
             android:id="@+id/nav_request"
             android:icon="@drawable/ic_menu_slideshow"
-            android:title="@string/request_list" />
+            android:title="@string/request_list" />-->
         <item
             android:id="@+id/nav_about"
             android:icon="@drawable/ic_menu_camera"

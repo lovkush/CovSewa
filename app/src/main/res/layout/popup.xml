@@ -24,7 +24,8 @@
             android:id="@+id/requestTopic"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Address Line 2"
+            android:hint="Topic"
+            android:maxLength="20"
             android:inputType="text" />
     </com.google.android.material.textfield.TextInputLayout>
 

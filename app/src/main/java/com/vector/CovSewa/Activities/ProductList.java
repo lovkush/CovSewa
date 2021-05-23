@@ -74,7 +74,8 @@ public class ProductList extends AppCompatActivity implements productRecycler.On
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
         Query query = reference.child("Product");
 
-        if(!category.equals("")){
+        if(!category.equals("")&&!
+                category.equals("All")){
             query = reference.child("Product").orderByChild("category").equalTo(category);
         }
 
@@ -134,7 +135,6 @@ public class ProductList extends AppCompatActivity implements productRecycler.On
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 category = customerList.get(position);
-                Log.d(TAG, "onItemSelected: " + category);
                 getData(category);
             }
         });
@@ -142,15 +142,16 @@ public class ProductList extends AppCompatActivity implements productRecycler.On
 
     private ArrayList<String> getCategoryList()
     {
-        ArrayList<String> customers = new ArrayList<>();
-        customers.add("Non Prescription Medicines");
-        customers.add("Oxygen Concentrators");
-        customers.add("Oxygen Cylinders");
-        customers.add("Masks and Sanitizers");
-        customers.add("Food");
-        customers.add("Medical Equipments");
-        customers.add("Ambulance");
-        return customers;
+        ArrayList<String> category = new ArrayList<>();
+        category.add("All");
+        category.add("Non Prescription Medicines");
+        category.add("Oxygen Concentrators");
+        category.add("Oxygen Cylinders");
+        category.add("Masks and Sanitizers");
+        category.add("Food");
+        category.add("Medical Equipments");
+        category.add("Ambulance");
+        return category;
     }
 
 

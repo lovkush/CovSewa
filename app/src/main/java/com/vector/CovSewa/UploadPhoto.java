@@ -95,10 +95,6 @@ public class UploadPhoto extends AppCompatActivity implements  CropImageView.OnS
                 && resultCode == AppCompatActivity.RESULT_OK) {
             Uri imageUri = CropImage.getPickImageResultUri(this, data);
 
-            // For API >= 23 we need to check specifically that we have permissions to read external
-            // storage,
-            // but we don't know if we need to for the URI so the simplest is to try open the stream and
-            // see if we get error.
             if (CropImage.isReadExternalStoragePermissionsRequired(this, imageUri)) {
 
                 // request permissions and handle the result in onRequestPermissionsResult()

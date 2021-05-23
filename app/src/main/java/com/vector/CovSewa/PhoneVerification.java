@@ -4,6 +4,9 @@ import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.Selection;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
@@ -35,14 +38,10 @@ public class PhoneVerification extends AppCompatActivity {
 
     private PhoneAuthProvider phoneAuthProvider;
 
-    // variable for our text input
-    // field for phone and OTP.
     private EditText edtPhone;// edtOTP;
     int status = 0;
-    // buttons for generating OTP and verifying OTP
     private Button verifyOTPBtn, generateOTPBtn;
 
-    // string for storing our verification ID
     private String verificationId;
 
     private PinView pinView;
@@ -63,6 +62,36 @@ public class PhoneVerification extends AppCompatActivity {
         verifyOTPBtn = findViewById(R.id.getOTP);
 
 
+        edtPhone.setText("+91");
+        Selection.setSelection(edtPhone.getText(), edtPhone.getText().length());
+
+
+        edtPhone.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                // TODO Auto-generated method stub
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if(!s.toString().startsWith("+91")){
+                    edtPhone.setText("+91");
+                    Selection.setSelection(edtPhone.getText(), edtPhone.getText().length());
+
+                }
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count,
+                                          int after) {
+                // TODO Auto-generated method stub
+
+            }
+
+        });
+
 
 
         try {
@@ -75,44 +104,8 @@ public class PhoneVerification extends AppCompatActivity {
 
 
         verifyOTPBtn.setOnClickListener(v ->{
-            sendVerificationCode(edtPhone.getText().toString());
+            sendVerificationCode(this.edtPhone.getText().toString());
         });
-        // setting onclick listner for generate OTP button.
-/*
-        verifyOTPBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                if(status==0){
-                    // below line is for checking weather the user
-                    // has entered his mobile number or not.
-                    if (TextUtils.isEmpty(edtPhone.getText().toString())) {
-                        // when mobile number text field is empty
-                        // displaying a toast message.
-                        Toast.makeText(PhoneVerification.this, "Please enter a valid phone number.", Toast.LENGTH_SHORT).show();
-                    } else {
-                        // if the text field is not empty we are calling our
-                        // send OTP method for getting OTP from Firebase.
-                        String phone = "+91" + edtPhone.getText().toString();
-                        sendVerificationCode(phone);
-                    }
-                }
-                else {
-                    // validating if the OTP text field is empty or not.
-                    if (TextUtils.isEmpty(edtOTP.getText().toString())) {
-                        // if the OTP text field is empty display
-                        // a message to user to enter OTP
-                        Toast.makeText(PhoneVerification.this, "Please enter OTP", Toast.LENGTH_SHORT).show();
-                    } else {
-                        // if OTP field is not empty calling
-                        // method to verify the OTP.
-                        verifyCode(edtOTP.getText().toString());
-                    }
-                }
-
-            }
-        });
-*/
 
     }
 

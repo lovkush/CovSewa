@@ -1,6 +1,8 @@
 package com.vector.CovSewa;
 
-public class UserData {
+import java.io.Serializable;
+
+public class UserData implements Serializable {
     private String Name, addLine1, addLine2, zipcode, email, contact, category ;
     private String[] receivedRequestId, generatedRequestId, productId;
 

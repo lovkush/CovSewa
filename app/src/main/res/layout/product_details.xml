@@ -12,59 +12,64 @@
     android:weightSum="2"
     tools:context=".Activities.ProductDetails">
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/materialCardView"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:cardCornerRadius="10dp"
-        app:layout_constraintBottom_toTopOf="@+id/guideline"
-        app:layout_constraintDimensionRatio="w,1:1"
+
+    <ImageView
+        android:id="@+id/imageViewProduct"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/vp_slider"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/vp_slider"
+        android:src="@drawable/ic_next" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/imageViewProduct"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageViewProduct"
+        android:src="@drawable/ic_baseline_navigate_before_24" />
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/vp_slider"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.473"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:strokeColor="@color/primaryLightColor"
-        app:strokeWidth="3dp">
+        app:layout_constraintVertical_bias="1.0">
 
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/profile_photo"
-            android:padding="20dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <androidx.viewpager.widget.ViewPager
-                android:id="@+id/vp_slider"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-        </RelativeLayout>
-
-    </com.google.android.material.card.MaterialCardView>
+    </androidx.viewpager.widget.ViewPager>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/requestProduct"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="44dp"
+        android:layout_marginTop="8dp"
         android:paddingHorizontal="40dp"
-        android:text="Request"
         android:paddingVertical="12dp"
-        android:textSize="25sp"
+        android:text="Request"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/call" />
+        app:layout_constraintStart_toEndOf="@+id/call"
+        app:layout_constraintTop_toBottomOf="@+id/productDescription" />
 
     <ImageView
         android:id="@+id/call"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@drawable/call_border"
+        android:clickable="true"
+        android:focusable="true"
         android:paddingHorizontal="40dp"
-        android:src="@drawable/ic_baseline_call_48"
+        android:paddingVertical="7dp"
+        android:src="@drawable/ic_baseline_call_24"
         android:visibility="gone"
-        android:paddingVertical="5dp"
-        android:background="@drawable/card_border"
         app:layout_constraintBottom_toBottomOf="@+id/requestProduct"
         app:layout_constraintEnd_toStartOf="@+id/requestProduct"
         app:layout_constraintStart_toStartOf="parent"
@@ -75,8 +80,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/activity_horizontal_margin_Small"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="12dp"
         android:text="Product Name"
-        android:textSize="30dp"
+        android:textColor="@color/black"
+        android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ll_dots" />
@@ -87,24 +96,29 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/activity_horizontal_margin_Small"
         android:layout_marginLeft="@dimen/activity_horizontal_margin_Small"
-        android:paddingHorizontal="4dp"
         android:text="Product Area"
+        android:textColor="@color/primaryDarkColor"
         android:textSize="20dp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/productName" />
 
-    <TextView
+    <EditText
         android:id="@+id/productDescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/activity_horizontal_margin_Large"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="16dp"
+        android:background="@null"
+        android:cursorVisible="false"
+        android:editable="false"
+        android:isScrollContainer="true"
         android:maxLines="6"
-        android:paddingHorizontal="20dp"
         android:text="@string/LoremIpsum"
-        android:textSize="20dp"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        android:justificationMode="inter_word"
+        app:layout_constraintHorizontal_bias="0.181"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/productArea" />
 
@@ -123,5 +137,26 @@
         android:orientation="horizontal"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline" />
+
+    <TextView
+        android:id="@+id/time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="9:40 MAR 23"
+        app:layout_constraintBottom_toBottomOf="@+id/productArea"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/productArea" />
+
+    <View
+        android:id="@+id/divider10"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintBottom_toTopOf="@+id/productDescription"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/productArea" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

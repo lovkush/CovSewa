@@ -37,6 +37,10 @@ public class RequestSent extends AppCompatActivity implements RequestListAdapter
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.request_sent);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("Request Sent");
+
         recyclerView = findViewById(R.id.requestSentRecycler);
         textView= findViewById(R.id.textView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -81,9 +85,8 @@ public class RequestSent extends AppCompatActivity implements RequestListAdapter
 
     @Override
     public void onCardClick(int position) {
-        Intent intent = new Intent(RequestSent.this,ProductDetails.class);
-        Log.d(TAG, "onCardClick: "
-                + requestData.get(position).getProductId() + position);
+        Intent intent = new Intent(RequestSent.this,ProductDetails2.class);
+
         intent.putExtra("ProductId", requestData.get(position).getProductId());
         startActivity(intent);
     }

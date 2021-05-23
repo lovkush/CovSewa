@@ -20,9 +20,7 @@
         android:id="@+id/linearLayout"
         android:background="@color/lightPink">
 
-        <RelativeLayout
-            android:layout_width="130dp"
-            android:layout_height="120dp">
+
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/myCardView"
@@ -42,19 +40,6 @@
 
             </androidx.cardview.widget.CardView>
 
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:layout_height="25dp"
-                android:layout_width="25dp"
-                app:backgroundTint="@color/material_on_background_disabled"
-                app:rippleColor="@null"
-                app:fabCustomSize="25dp"
-                android:src="@drawable/ic_baseline_add_24"
-                app:maxImageSize="15dp"
-                android:layout_marginTop="5dp"
-                android:scaleType="center"
-                android:id="@+id/editProfilImage"
-                android:layout_alignParentRight="true" />
-        </RelativeLayout>
 
 
         <TextView
@@ -117,16 +102,6 @@
                 android:paddingHorizontal="10dp"
                 app:layout_constraintStart_toEndOf="@+id/userIcon"/>
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:id="@+id/nameEdit"
-                android:src="@drawable/ic_edit2"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:layout_margin="15dp"/>
-
             <View
                 android:id="@+id/divider"
                 android:layout_width="match_parent"
@@ -173,16 +148,6 @@
                 android:textSize="14dp"
                 android:paddingHorizontal="10dp"
                 app:layout_constraintStart_toEndOf="@+id/emailIcon"/>
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:id="@+id/emalEdit"
-                android:src="@drawable/ic_edit2"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:layout_margin="15dp"/>
 
             <View
                 android:id="@+id/divider2"
@@ -233,16 +198,6 @@
                 android:maxWidth="280dp"
                 android:layout_marginBottom="10dp"
                 app:layout_constraintStart_toEndOf="@+id/addIcon"/>
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:id="@+id/addEdit"
-                android:src="@drawable/ic_edit2"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:layout_margin="15dp"/>
 
             <View
                 android:id="@+id/divider3"
@@ -297,16 +252,6 @@
                 android:layout_marginBottom="10dp"
                 app:layout_constraintStart_toEndOf="@+id/phoneIcon"/>
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:id="@+id/phoneEdit"
-                android:src="@drawable/ic_edit2"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:layout_margin="15dp"/>
-
             <View
                 android:id="@+id/divider4"
                 android:layout_width="match_parent"
@@ -359,16 +304,6 @@
                 android:layout_marginBottom="10dp"
                 app:layout_constraintStart_toEndOf="@+id/TypeIcon"/>
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:id="@+id/TypeEdit"
-                android:src="@drawable/ic_edit2"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:layout_margin="15dp"/>
-
             <View
                 android:id="@+id/divider5"
                 android:layout_width="match_parent"
@@ -379,6 +314,14 @@
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Edit Profile"
+            android:id="@+id/editProfile"
+            android:layout_gravity="end"
+            android:layout_margin="20dp"/>
     </LinearLayout>
 
 
