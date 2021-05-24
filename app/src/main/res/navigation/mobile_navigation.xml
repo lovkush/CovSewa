@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_home">
+
+
+
+    <fragment
+        android:id="@+id/nav_my_profile"
+        android:name="com.vector.CovSewa.ui.myProfile.MyProfileFragment"
+        android:label="@string/my_profile"
+        tools:layout="@layout/fragment_my_profile" />
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.vector.CovSewa.ui.home.HomeFragment"
+        android:label="@string/menu_home"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/nav_donation"
+        android:name="com.vector.CovSewa.ui.myDonation.MyDonationFragment"
+        android:label="@string/my_donation"
+        tools:layout="@layout/fragment_donation" />
+
+    <fragment
+        android:id="@+id/nav_request"
+        android:name="com.vector.CovSewa.ui.myRequest.MyRequestFragment"
+        android:label="@string/request_list"
+        tools:layout="@layout/fragment_request" />
+
+    <fragment
+        android:id="@+id/nav_support"
+        android:name="com.vector.CovSewa.ui.SupportUs.SupportUsFragment"
+        android:label="@string/support_us"
+        tools:layout="@layout/fragment_support" />
+
+    <fragment
+        android:id="@+id/nav_about"
+        android:name="com.vector.CovSewa.ui.AboutUs.AboutUsFragment"
+        android:label="@string/about_us"
+        tools:layout="@layout/fragment_about" />
+
+    <fragment
+        android:id="@+id/nav_terms"
+        android:name="com.vector.CovSewa.ui.Terms.TermsFragment"
+        android:label="@string/terms"
+        tools:layout="@layout/fragment_terms" />
+
+    <fragment
+        android:id="@+id/privacy_policy"
+        android:name="com.vector.CovSewa.ui.PrivacyPolicy"
+        android:label="@string/terms"
+        tools:layout="@layout/fragment_privacy_policy" />
+
+</navigation>

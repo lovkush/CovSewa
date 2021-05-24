@@ -30,7 +30,7 @@
             android:layout_marginBottom="30dp"
             android:gravity="center"
             android:text="Sign In"
-            android:textColor="@color/primaryColor"
+            android:textColor="#2D2F31"
             android:textSize="30sp"
             android:textStyle="bold">
 

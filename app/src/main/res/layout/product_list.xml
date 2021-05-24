@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Activities.ProductList">
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:paddingHorizontal="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_height="wrap_content"
+        app:endIconMode="dropdown_menu"
+        app:endIconDrawable="@drawable/ic_baseline_keyboard_arrow_down_24"
+        app:boxBackgroundColor="@color/backgroundColor">
+
+        <AutoCompleteTextView
+            android:id="@+id/textArea"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="10dp"
+            android:hint="Delhi"
+            android:editable="false"
+            android:inputType="none" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:paddingHorizontal="10dp"
+        app:endIconMode="dropdown_menu"
+        app:endIconDrawable="@drawable/ic_baseline_keyboard_arrow_down_24"
+        app:boxBackgroundColor="@color/backgroundColor">
+
+        <AutoCompleteTextView
+            android:id="@+id/textCategory"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="10dp"
+            android:hint="Select Product Category"
+            android:editable="false"
+            android:inputType="none" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_marginTop="10dp"
+        android:layout_marginHorizontal="@dimen/activity_horizontal_margin_Small"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/productRecycler"
+        tools:itemCount="6"
+        android:visibility="gone"
+        tools:listitem="@layout/donation_card"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text ="Nothing available"
+        android:gravity="center"
+        android:textSize="20sp"
+        android:paddingVertical="20dp"
+        android:id="@+id/textProductList"/>
+</LinearLayout>

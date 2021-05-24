@@ -7,41 +7,43 @@
     android:background="@drawable/splash"
     tools:context=".OnBoarding">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="20dp"
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/vp_slider"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="24dp"
+        app:layout_constraintBottom_toTopOf="@+id/ll_dots"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.viewpager.widget.ViewPager
-            android:id="@+id/vp_slider"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-        <LinearLayout
-            android:id="@+id/ll_dots"
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="80dp"
-            android:gravity="center"
-            android:orientation="horizontal"/>
-
-    </RelativeLayout>
+    </androidx.viewpager.widget.ViewPager>
 
     <ImageView
         android:id="@+id/nextImage"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:layout_marginBottom="40dp"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
         android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="24dp"
         android:background="@drawable/circular_border"
-        android:padding="5dp"
+        android:padding="10dp"
         android:src="@drawable/ic_next"
-        android:paddingLeft="7dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/ll_dots"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/nextImage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.97" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

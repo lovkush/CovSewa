@@ -8,9 +8,14 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFF</color>
     <color name="backgroundColor">#f9fafd</color>
-    <color name="primaryColor">#1a237e</color>
-    <color name="primaryLightColor">#534bae</color>
-    <color name="primaryDarkColor">#000051</color>
+    <color name="primaryColor">#6804ec</color>
+    <color name="primaryLightColor">#8536ED</color>
+    <color name="primaryDarkColor">#4701A5</color>
     <color name="primaryTextColor">#ffffff</color>
     <color name="backgroundColorBlue">#ffe7f0ff</color>
+    <color name="Pink">#f9c4FD</color>
+    <color name="lightPink">#F6DFF8</color>
+
+    <color name="app_barColor">#b982fb</color>
+
 </resources>

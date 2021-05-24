@@ -1,25 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.CovSewa">
+    package="com.vector.CovSewa">
+
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:networkSecurityConfig="@xml/network_security_config"
+        android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.CovSeva">
-        <activity android:name=".onBoarding.OnBoarding"></activity>
+        <activity android:name=".Activities.EditProfile"></activity>
+        <activity android:name=".Activities.ProfileActivity" />
+        <activity android:name=".Activities.MyProduct" />
+        <activity android:name=".Activities.CovidInfo" />
+        <activity android:name=".Activities.DonationReview" />
+        <activity android:name=".Activities.AppReview" />
+        <activity android:name=".Activities.RequestDetails" />
         <activity
-            android:name=".OnBoarding"
-            android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar">
+            android:name=".Activities.RequestReceived"
+            android:label="@string/title_activity_request_recieved"
+            android:theme="@style/Theme.CovSeva.NoActionBar" />
+        <activity android:name=".Activities.Account" />
+        <activity android:name=".Activities.ProductDetails" />
+        <activity android:name=".Activities.Covid19Info"></activity>
+        <activity android:name=".Activities.Review" />
+        <activity android:name=".Activities.RequestList" />
+        <activity android:name=".Activities.RequestSent" />
+        <activity android:name=".Activities.ProductList" />
+        <activity android:name=".Activities.ProductDetails2" />
+        <activity android:name=".Activities.Donor" />
+        <activity
+            android:name=".Activities.DashBoard"
+            android:label="@string/title_activity_dash_board"
+            android:theme="@style/Theme.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".OnBoarding"
+            android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar" />
         <activity
             android:name=".GetUserDetails"
             android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar" />
@@ -33,8 +62,12 @@
             android:name=".ResetPassword"
             android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar" />
         <activity
+            android:name=".UploadPhoto"
+            android:requestLegacyExternalStorage="true"
+            android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar" />
+        <activity
             android:name=".RegisterActivity"
-            android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar"></activity>
+            android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar" />
         <activity
             android:name=".SignInActivity"
             android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar" />
@@ -43,7 +76,7 @@
             android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar" />
         <activity
             android:name=".PhoneVerification"
-            android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar"></activity>
+            android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar" />
         <activity android:name=".MainActivity" />
     </application>
 
